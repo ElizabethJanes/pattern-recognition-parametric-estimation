@@ -21,7 +21,9 @@ def maximum_likelihood_classifier(
         test_vector, c_one_mean, c_one_covariance, c_one_lambda, c_one_a, c_one_b
     )
 
-    if c_zero_probability_distribution > c_one_probability_distribution:
+    if c_zero_probability_distribution == c_one_probability_distribution == 0:
+        classification = 'unclassified'
+    elif c_zero_probability_distribution > c_one_probability_distribution:
         classification = 0
     else:
         classification = 1

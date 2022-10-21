@@ -17,6 +17,8 @@ def prediction_error(
         c_one_b=None
 ):
     """
+    Computes the prediction error for the given classifier and probability distribution based on the provided test data, by comparing to the provided test_labels. Accepts optional parameters associated with each classifier and probability distribution.
+
     :param classifier: The function for the classifier to be used for making predictions on the test dataset (ML or MAP)
     :param probability_distribution: The probability distribution to be used to evaluate the likelihood of each test point's classification
     :param test_data: The full MNIST test dataset for the classes of interest (class 0 and 1)
@@ -36,6 +38,7 @@ def prediction_error(
     :return: Prediction error for the given classifier using the provided probability distribution with the test dataset
     """
     incorrect_prediction_count = 0
+    unclassified = 0
     for test_vector, label in zip(test_data, test_labels):
         classification = classifier(
             test_vector,
@@ -53,7 +56,9 @@ def prediction_error(
             c_one_a,
             c_one_b
         )
-        if classification != label:
+        if classification == 'unclassified':
+            unclassified += 1
+        elif classification != label:
             incorrect_prediction_count += 1
 
-    return incorrect_prediction_count / len(test_data)
+    return incorrect_prediction_count / (len(test_data) - unclassified)

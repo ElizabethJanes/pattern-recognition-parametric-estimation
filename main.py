@@ -1,6 +1,6 @@
 import numpy as np
 from dataset_utilities import get_pca_transformed_dataset, get_class_zero, get_class_one
-from gaussian_distribution import get_gaussian_class_mean, get_gaussian_covariance_matrix, decision_boundary, gaussian_probability_distribution
+from gaussian_distribution import get_gaussian_class_mean, get_gaussian_covariance_matrix, mathematical_decision_boundary, decision_boundary, gaussian_probability_distribution
 from exponential_distribution import get_class_lambda, exponential_probability_distribution
 from uniform_distribution import get_class_parameters, uniform_probability_distribution
 from prediction_error import prediction_error
@@ -25,6 +25,7 @@ def exercise_1():
     print(f'mean = {gaussian_mean_class_zero_2d}')
     print(f'covariance matrix = {gaussian_covariance_class_zero_2d}')
     print(f'covariance inverse = {np.linalg.inv(gaussian_covariance_class_zero_2d)}')
+    print(f'covariance determinant = {np.linalg.det(gaussian_covariance_class_zero_2d)}')
 
     gaussian_mean_class_one_2d = get_gaussian_class_mean(train_class_one_2d_data)
     gaussian_covariance_class_one_2d = get_gaussian_covariance_matrix(
@@ -34,6 +35,7 @@ def exercise_1():
     print(f'mean = {gaussian_mean_class_one_2d}')
     print(f'covariance matrix = {gaussian_covariance_class_one_2d}')
     print(f'covariance inverse = {np.linalg.inv(gaussian_covariance_class_one_2d)}')
+    print(f'covariance determinant = {np.linalg.det(gaussian_covariance_class_one_2d)}')
 
     # Question 3: Use ML classifier on estimated class distributions to make predictions on test set. Find the
     # prediction error of the ML classifier.
@@ -50,6 +52,14 @@ def exercise_1():
     print(f'Gaussian Maximum Likelihood Prediction Error = {gaussian_ml_prediction_error}')
 
     # Question 4: Plot the decision boundary for the classifier.
+    mathematical_decision_boundary(
+        train_class_zero_2d_data,
+        train_class_one_2d_data,
+        gaussian_mean_class_zero_2d,
+        gaussian_covariance_class_zero_2d,
+        gaussian_mean_class_one_2d,
+        gaussian_covariance_class_one_2d
+    )
     decision_boundary(
         train_class_zero_2d_data,
         train_class_one_2d_data,

@@ -1,2 +1,2 @@
-# pattern-recognition-assignment-2
+# pattern-recognition-parametric-estimation
  
